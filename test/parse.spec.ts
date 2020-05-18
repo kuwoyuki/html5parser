@@ -9,7 +9,7 @@
  */
 
 import * as assert from 'assert';
-import { parse } from './parse';
+import { parse } from '../src/parse';
 import {
   IAttribute,
   IAttributeValue,
@@ -17,7 +17,7 @@ import {
   ITag,
   IText,
   SyntaxKind,
-} from './types';
+} from '../src/types';
 
 let index = 0;
 

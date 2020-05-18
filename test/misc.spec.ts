@@ -11,7 +11,7 @@
 import * as fs from 'fs-extra';
 import fetch from 'node-fetch';
 import * as path from 'path';
-import { parse } from './parse';
+import { parse } from '../src/parse';
 
 function run(url: string) {
   const id = url.replace(/[^\w\d]+/g, '_').replace(/^_+|_+$/g, '');

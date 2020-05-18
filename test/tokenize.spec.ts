@@ -9,7 +9,7 @@
  */
 
 import * as assert from 'assert';
-import { IToken, tokenize, TokenKind } from './tokenize';
+import { IToken, tokenize, TokenKind } from '../src/tokenize';
 
 interface ICase {
   name: string;
