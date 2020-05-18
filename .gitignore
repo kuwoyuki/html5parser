@@ -5,6 +5,7 @@ temp/
 esm/
 cjs/
 lib/
+dist/
 *.log
 local.*
 local-*

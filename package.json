@@ -1,7 +1,7 @@
 {
   "name": "html5parser",
   "description": "A fast, accurate AST parser for HTML5",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "author": "acrazing <joking.young@gmail.com>",
   "keywords": [
     "html5",
@@ -10,28 +10,19 @@
     "attributes"
   ],
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "lib/index.mjs",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "files": [
     "assets/",
     "lib/",
     "src/"
   ],
   "scripts": {
-    "build": "run-s clean && run-p build:cjs build:esm && run-s build:esm:rename build:cjs:rename",
-    "build:cjs": "tsc --outDir cjs --module commonjs",
-    "build:cjs:rename": "run-p build:cjs:rename:js build:cjs:rename:map",
-    "build:cjs:rename:js": "find ./cjs -type f -name '*.js' | sed -E 's/^\\.\\/cjs\\/(.+)$/\\1/' | xargs -I % mv ./cjs/% ./lib/%",
-    "build:cjs:rename:map": "find ./cjs -type f -name '*.js.map' | sed -E 's/^\\.\\/cjs\\/(.+)$/\\1/' | xargs -I % mv ./cjs/% ./lib/%",
-    "build:esm": "tsc --outDir lib --module esnext --declaration",
-    "build:esm:rename": "run-p build:esm:rename:js build:esm:rename:map",
-    "build:esm:rename:js": "find ./lib -type f -name '*.js' | sed -E 's/^(.+)\\.js$/\\1/' | xargs -I % mv %.js %.mjs",
-    "build:esm:rename:map": "find ./lib -type f -name '*.js.map' | sed -E 's/^(.+)\\.js\\.map$/\\1/' | xargs -I % mv %.js.map %.mjs.map",
-    "clean": "rm -rf cjs esm lib build temp .cache",
-    "prepublishOnly": "run-s test build",
-    "start": "npm run clean && npm run build:esm -- --watch",
-    "test": "jest"
+    "build": "npx tsc",
+    "clean": "rm -rf esm cjs lib temp .cache",
+    "test": "jest",
+    "denoify": "npx denoify"
   },
   "repository": {
     "type": "git",
@@ -46,6 +37,7 @@
     "@types/jest": "^24.0.25",
     "@types/node": "^13.1.4",
     "@types/node-fetch": "^2.5.4",
+    "denoify": "^0.2.9",
     "fs-extra": "^8.1.0",
     "husky": "^3.1.0",
     "jest": "^24.9.0",
@@ -69,7 +61,7 @@
     "cacheDirectory": ".cache/jest",
     "collectCoverage": false,
     "collectCoverageFrom": [
-      "<rootDir>/src/**/*.{ts,tsx}",
+      "<rootDir>/test/**/*.{ts,tsx}",
       "!**/*.d.ts"
     ],
     "coverageDirectory": "temp/coverage",
@@ -78,7 +70,7 @@
       "ENV": {}
     },
     "testMatch": [
-      "<rootDir>/src/**/*.spec.{ts,tsx}"
+      "<rootDir>/test/**/*.spec.{ts,tsx}"
     ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
